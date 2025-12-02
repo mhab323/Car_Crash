@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E2D1D1"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/matrixLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#E2D1D1"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/LL_hearts_Main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="23dp"
+                >
+
+                <ImageView
+                    android:id="@+id/img_heart1_Main"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:paddingEnd="5dp"
+                    android:src="@drawable/heart"/>
+
+                <ImageView
+                    android:id="@+id/img_heart2_Main"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:paddingEnd="5dp"
+                    android:src="@drawable/heart"/>
+
+                <ImageView
+                    android:id="@+id/img_heart3_Main"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:paddingEnd="5dp"
+                    android:src="@drawable/heart"/>
+
+
+
+            </LinearLayout>
+
+
+                <LinearLayout
+                android:id="@+id/matRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                >
+
+                <ImageView
+                    android:id="@+id/stone00"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/stone"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:id="@+id/stone01"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/stone"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:id="@+id/stone02"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/stone"
+                    android:layout_weight="1"/>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/matRow2"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                >
+
+                <ImageView
+                    android:id="@+id/stone10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/stone"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:id="@+id/stone11"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/stone"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:id="@+id/stone12"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/stone"
+                    android:layout_weight="1"/>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/matRow3"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                >
+
+                <ImageView
+                    android:id="@+id/stone20"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/stone"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:id="@+id/stone21"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/stone"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:id="@+id/stone22"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/stone"
+                    android:layout_weight="1"/>
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/matRow4"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                >
+
+                <ImageView
+                    android:id="@+id/stone30"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/stone"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:id="@+id/stone31"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/stone"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:id="@+id/stone32"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/stone"
+                    android:layout_weight="1"/>
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/matRow5"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                >
+
+                <ImageView
+                    android:id="@+id/stone40"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/stone"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:id="@+id/stone41"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/stone"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:id="@+id/stone42"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/stone"
+                    android:layout_weight="1"/>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/matRow6"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                >
+                <ImageView
+                    android:id="@+id/stone50"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/stone"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:id="@+id/stone51"
+                    android:layout_width="0dp"
+                    android:src="@drawable/stone"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:id="@+id/stone52"
+                    android:src="@drawable/stone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/carlayout"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                >
+
+                <ImageView
+                    android:id="@+id/carLeft"
+                    android:src="@drawable/car"
+                    android:layout_marginVertical="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:id="@+id/carCenter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:src="@drawable/car"
+                    android:layout_weight="1"
+                    />
+
+                <ImageView
+                    android:id="@+id/carRight"
+                    android:layout_width="0dp"
+                    android:src="@drawable/car"
+                    android:layout_marginVertical="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/buttonsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:background="#E2D1D1"
+            >
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/leftButton"
+                app:icon="@drawable/leftarrow"
+                app:iconGravity="textEnd"
+                app:iconSize="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="#FF1300"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/rightButton"
+                app:icon="@drawable/rightarrow"
+                app:iconGravity="textEnd"
+                app:iconSize="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="#FF1300"
+                />
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
