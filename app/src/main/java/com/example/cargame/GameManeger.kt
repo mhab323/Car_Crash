@@ -9,29 +9,23 @@ import kotlin.random.Random
 class GameManeger(
     private val rows: Int,
     private val cols: Int,
-    private val boardUpdated: (Array<IntArray>) -> Unit,
-    private val carPositionChanged: (Int) -> Unit,
-    private val livesUpdate: (Int) -> Unit,
-    private val gameOver: () -> Unit,
-    private val collision: (Int) -> Unit
+    private val callBack: GameCallBack
 )
 {
-    private val INITIAL_LIVES = 3
-    private  val BASE_TICK_DELAY_MS = 1000L
-    private  val MIN_TICK_DELAY_MS = 500L
-    private  val SPEEDUP_EVERY_TICKS = 5
-    private  val SPEEDUP_STEP_MS = 100L
-
-    private val board: Array<IntArray> = Array(rows){ IntArray(cols) { 0 } }
-
+    companion object {
+        private const val INITIAL_LIVES = 3
+        private const val BASE_TICK_DELAY_MS = 1000L
+        private const val MIN_TICK_DELAY_MS = 500L
+        private const val SPEEDUP_EVERY_TICKS = 5
+        private const val SPEEDUP_STEP_MS = 100L
+    }
+    private val board: Array<Array<TileType>> = Array(rows) {
+        Array(cols) { TileType.EMPTY }
+    }
     private  var carCol:Int = cols/2
-
     private var lives: Int = INITIAL_LIVES
-
     private var flag = true
-
     private val handler = Handler(Looper.getMainLooper())
-
     private var isRunning = false
     private var currentDelay = BASE_TICK_DELAY_MS
     private var ticks = 0
@@ -55,40 +49,42 @@ class GameManeger(
      fun resetGame() {
         for(r in 0 until rows){
             for(c in 0 until cols){
-                board[r][c] = 0
+                board[r][c] = TileType.EMPTY
             }
         }
          lives = INITIAL_LIVES
          carCol = cols/2
-
          flag = true
+         currentDelay = BASE_TICK_DELAY_MS
+         ticks = 0
          generateInitialRows()
 
-         boardUpdated(copyBoard())
-         carPositionChanged(carCol)
-         livesUpdate(lives)
+         callBack.onBoardUpdated(copyBoard())
+         callBack.onCarPositionChanged(carCol)
+         callBack.onLivesUpdated(lives)
     }
+
 
      fun generateInitialRows() {
          board[0] = generateRow()
 
         for(r in 1 until rows){
             for(c in 0 until cols)
-            board[r][c] = 0
+                board[r][c] = TileType.EMPTY
         }
     }
 
 
-    private fun generateRow(): IntArray {
-        val row = IntArray(cols) { 0 }
+    private fun generateRow(): Array<TileType> {
+        val row = Array(cols) { TileType.EMPTY }
         val maxRocks = min(2,cols)
         val rocksToPlace = Random.nextInt(1,maxRocks+1)
         var placed = 0
         
         while(placed < rocksToPlace){
             val col = Random.nextInt(cols)
-            if(row[col] == 0){
-                row[col] = 1
+            if(row[col] == TileType.EMPTY){
+                row[col] = TileType.ROCK
                 placed++
             }
         }
@@ -107,17 +103,16 @@ class GameManeger(
         }
         else
         {
-            IntArray(cols)  { 0 }
+            Array(cols) { TileType.EMPTY }
         }
         flag = !flag
 
         board[0] = newRow
 
-        boardUpdated(copyBoard())
-    }
+        callBack.onBoardUpdated(copyBoard())    }
 
-    private fun copyBoard(): Array<IntArray> = Array(rows) {
-        r -> board[r].clone()
+    private fun copyBoard(): Array<Array<TileType>> = Array(rows) { r ->
+        board[r].clone()
     }
 
     private fun adjustSpeed() {
@@ -141,16 +136,15 @@ class GameManeger(
     fun endGame(){
         isRunning = false
         handler.removeCallbacks(tick)
-        gameOver()
+        callBack.onGameOver()
     }
 
     private fun checkCollision() {
         val lastRow = rows - 1
-        if(board[lastRow][carCol] == 1) {
+        if(board[lastRow][carCol] == TileType.ROCK) {
             lives--
-            collision(lives)
-            livesUpdate(lives)
-
+            callBack.onCollision(lives)
+            callBack.onLivesUpdated(lives)
             if(lives <= 0) {
                 endGame()
             }
@@ -160,14 +154,14 @@ class GameManeger(
     fun moveCarLeft() {
         if (carCol > 0) {
             carCol--
-            carPositionChanged(carCol)
+            callBack.onCarPositionChanged(carCol)
         }
     }
 
     fun moveCarRight() {
         if (carCol < cols - 1) {
             carCol++
-            carPositionChanged(carCol)
+            callBack.onCarPositionChanged(carCol)
         }
     }
 

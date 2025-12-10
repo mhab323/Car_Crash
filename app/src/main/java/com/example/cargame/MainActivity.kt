@@ -10,7 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.cargame.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),GameCallBack {
 
 
     private lateinit var binding : ActivityMainBinding
@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         setupGameManager()
         setupButtons()
 
-        //gm.startGame()
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -46,11 +45,7 @@ class MainActivity : AppCompatActivity() {
         gm = GameManeger(
             rows = 6,
             cols = 3,
-            boardUpdated = { board -> updateRocks(board) },
-            carPositionChanged = { col -> updateCar(col) },
-            livesUpdate = { lives -> updateHearts(lives) },
-            gameOver = { showGameOverDialog() },
-            collision = {livesLeft -> showCollisionToast(livesLeft)}
+            callBack = this
         )
     }
 
@@ -64,10 +59,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-        gm.pauseGame()
-    }
 
     private fun setupViews() {
         rockViews = arrayOf(
@@ -92,11 +83,24 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private fun updateRocks(board: Array<IntArray>) {
+    override fun onStop() {
+        super.onStop()
+        gm.pauseGame()
+    }
+    override fun onPause() {
+        super.onPause()
+        gm.pauseGame()
+    }
+    override fun onResume() {
+        super.onResume()
+        gm.startGame()
+    }
+
+    private fun updateRocks(board: Array<Array<TileType>>) {
         for (r in board.indices) {
             for (c in board[r].indices) {
                 rockViews[r][c].visibility =
-                    if (board[r][c] == 1) View.VISIBLE else View.INVISIBLE
+                    if (board[r][c] == TileType.ROCK) View.VISIBLE else View.INVISIBLE
             }
         }
     }
@@ -130,15 +134,6 @@ class MainActivity : AppCompatActivity() {
             .show()
     }
 
-    override fun onPause() {
-        super.onPause()
-        gm.pauseGame()
-    }
-    override fun onResume() {
-        super.onResume()
-        gm.startGame()
-    }
-
     private fun showCollisionToast(livesLeft:Int){
         Toast.makeText(
             this,
@@ -146,6 +141,26 @@ class MainActivity : AppCompatActivity() {
             Toast.LENGTH_SHORT
         ).show()
 }
+
+    override fun onBoardUpdated(board: Array<Array<TileType>>) {
+        updateRocks(board)
+    }
+
+    override fun onCarPositionChanged(col: Int) {
+        updateCar(col)
+    }
+
+    override fun onCollision(livesLeft: Int) {
+        showCollisionToast(livesLeft)
+    }
+
+    override fun onGameOver() {
+        showGameOverDialog()
+    }
+
+    override fun onLivesUpdated(lives: Int) {
+        updateHearts(lives)
+    }
 
 
 
