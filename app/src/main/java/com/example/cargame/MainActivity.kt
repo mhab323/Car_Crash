@@ -1,6 +1,8 @@
 package com.example.cargame
 
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -10,16 +12,16 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.cargame.databinding.ActivityMainBinding
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity(),GameCallBack {
 
 
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
-    private lateinit var gm : GameManeger
+    private lateinit var gm: GameManeger
     private lateinit var rockViews: Array<Array<View>>
     private lateinit var carViews: Array<View>
     private lateinit var heartViews: Array<View>
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +47,7 @@ class MainActivity : AppCompatActivity(),GameCallBack {
         gm = GameManeger(
             rows = 6,
             cols = 3,
-            callBack = this
+            callBack = this,
         )
     }
 
@@ -62,12 +64,12 @@ class MainActivity : AppCompatActivity(),GameCallBack {
 
     private fun setupViews() {
         rockViews = arrayOf(
-            arrayOf(binding.stone00,binding.stone01,binding.stone02),
-            arrayOf(binding.stone10,binding.stone11,binding.stone12),
-            arrayOf(binding.stone20,binding.stone21,binding.stone22),
-            arrayOf(binding.stone30,binding.stone31,binding.stone32),
-            arrayOf(binding.stone40,binding.stone41,binding.stone42),
-            arrayOf(binding.stone50,binding.stone51,binding.stone52)
+            arrayOf(binding.stone00, binding.stone01, binding.stone02),
+            arrayOf(binding.stone10, binding.stone11, binding.stone12),
+            arrayOf(binding.stone20, binding.stone21, binding.stone22),
+            arrayOf(binding.stone30, binding.stone31, binding.stone32),
+            arrayOf(binding.stone40, binding.stone41, binding.stone42),
+            arrayOf(binding.stone50, binding.stone51, binding.stone52)
         )
 
         carViews = arrayOf(
@@ -87,10 +89,12 @@ class MainActivity : AppCompatActivity(),GameCallBack {
         super.onStop()
         gm.pauseGame()
     }
+
     override fun onPause() {
         super.onPause()
         gm.pauseGame()
     }
+
     override fun onResume() {
         super.onResume()
         gm.startGame()
@@ -133,14 +137,21 @@ class MainActivity : AppCompatActivity(),GameCallBack {
             }
             .show()
     }
+    private fun vibratePhone() {
+        val vibrator = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
-    private fun showCollisionToast(livesLeft:Int){
+        vibrator.vibrate(
+            VibrationEffect.createOneShot(500,
+                VibrationEffect.DEFAULT_AMPLITUDE))
+    }
+
+    private fun showCollisionToast(livesLeft: Int) {
         Toast.makeText(
             this,
             "Crash! Lives left: $livesLeft",
             Toast.LENGTH_SHORT
         ).show()
-}
+    }
 
     override fun onBoardUpdated(board: Array<Array<TileType>>) {
         updateRocks(board)
@@ -152,7 +163,9 @@ class MainActivity : AppCompatActivity(),GameCallBack {
 
     override fun onCollision(livesLeft: Int) {
         showCollisionToast(livesLeft)
+        vibratePhone()
     }
+
 
     override fun onGameOver() {
         showGameOverDialog()
@@ -161,7 +174,7 @@ class MainActivity : AppCompatActivity(),GameCallBack {
     override fun onLivesUpdated(lives: Int) {
         updateHearts(lives)
     }
-
-
-
 }
+
+
+

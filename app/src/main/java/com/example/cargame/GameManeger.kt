@@ -9,7 +9,7 @@ import kotlin.random.Random
 class GameManeger(
     private val rows: Int,
     private val cols: Int,
-    private val callBack: GameCallBack
+    private val callBack: GameCallBack,
 )
 {
     companion object {
@@ -63,6 +63,7 @@ class GameManeger(
          callBack.onCarPositionChanged(carCol)
          callBack.onLivesUpdated(lives)
     }
+
 
 
      fun generateInitialRows() {
