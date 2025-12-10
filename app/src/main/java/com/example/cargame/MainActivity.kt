@@ -12,6 +12,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.cargame.databinding.ActivityMainBinding
 
+
+
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity(),GameCallBack {
 
@@ -23,12 +25,16 @@ class MainActivity : AppCompatActivity(),GameCallBack {
     private lateinit var carViews: Array<View>
     private lateinit var heartViews: Array<View>
 
+    private lateinit var vibrator: Vibrator
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        vibrator = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
         setupViews()
         setupGameManager()
@@ -138,8 +144,6 @@ class MainActivity : AppCompatActivity(),GameCallBack {
             .show()
     }
     private fun vibratePhone() {
-        val vibrator = getSystemService(VIBRATOR_SERVICE) as Vibrator
-
         vibrator.vibrate(
             VibrationEffect.createOneShot(500,
                 VibrationEffect.DEFAULT_AMPLITUDE))
