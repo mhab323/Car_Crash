@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity(),GameCallBack {
         gm = GameManeger(
             rows = 6,
             cols = 3,
-            callBack = this,
+            callBack = this
         )
     }
 

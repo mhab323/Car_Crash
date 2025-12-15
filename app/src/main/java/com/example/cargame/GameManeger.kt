@@ -67,7 +67,7 @@ class GameManeger(
 
 
      fun generateInitialRows() {
-         board[0] = generateRow()
+        board[0] = generateRow()
 
         for(r in 1 until rows){
             for(c in 0 until cols)
