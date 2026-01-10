@@ -1,4 +1,6 @@
-package com.example.cargame
+package interfaces
+
+import data.cargame.TileType
 
 interface GameCallBack {
     fun onBoardUpdated(board: Array<Array<TileType>>)
@@ -6,4 +8,8 @@ interface GameCallBack {
     fun onLivesUpdated(lives: Int)
     fun onGameOver()
     fun onCollision(livesLeft: Int)
+
+    fun onDistanceUpdated(distance: Double)
+
+    fun onCoinPickedUp()
 }

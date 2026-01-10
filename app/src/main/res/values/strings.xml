@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CarGame</string>
+    <string name="sensors">SENSORS</string>
+    <string name="arrows">ARROWS</string>
+    <string name="top_10">TOP 10</string>
+    <string name="enter_your_namehint">Enter Your Name</string>
+    <string name="_0_0">0.0</string>
+    <string name="top_racers">TOP RACERS</string>
 </resources>

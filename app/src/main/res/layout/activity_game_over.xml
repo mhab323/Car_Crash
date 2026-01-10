@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ui.GameOverActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="20dp"
+        android:background="@drawable/bg_gameover">
+
+        <TextView
+            android:id="@+id/score_LBL_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PLAYER: GUEST"
+            android:textColor="#FFFFFF"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:letterSpacing="0.1"
+            android:shadowColor="#000000"
+            android:shadowDx="4"
+            android:shadowDy="4"
+            android:shadowRadius="5"
+            android:layout_marginTop="50dp"
+            android:fontFamily="sans-serif-black"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/score_LBL_score"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0000"
+            android:gravity="center"
+            android:textColor="#FFEB3B"
+            android:textSize="45sp"
+            android:textStyle="bold"
+            android:shadowColor="#BC5100"
+            android:shadowDx="6"
+            android:shadowDy="6"
+            android:shadowRadius="2"
+            android:fontFamily="monospace"/>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/score_BTN_Top"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="TOP 10"
+            android:textColor="#FFFFFF"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            app:backgroundTint="#FF9800"
+            app:cornerRadius="24dp"
+            app:strokeColor="#FFFFFF"
+            app:strokeWidth="2dp"
+            app:icon="@drawable/trophy"
+            app:iconSize="40dp"
+            app:iconGravity="textStart"
+            android:elevation="8dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/score_BTN_again"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="PLAY AGAIN"
+            android:textColor="#FFFFFF"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            app:backgroundTint="#FF9800"
+            app:cornerRadius="24dp"
+            app:strokeColor="#FFFFFF"
+            app:strokeWidth="2dp"
+            app:icon="@drawable/redo"
+            app:iconSize="40dp"
+            app:iconGravity="textStart"
+            android:elevation="8dp"/>
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

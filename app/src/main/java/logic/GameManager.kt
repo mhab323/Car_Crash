@@ -1,12 +1,14 @@
-package com.example.cargame
+package logic
 
 import android.os.Handler
 import android.os.Looper
+import interfaces.GameCallBack
+import data.cargame.TileType
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.random.Random
 
-class GameManeger(
+class GameManager(
     private val rows: Int,
     private val cols: Int,
     private val callBack: GameCallBack,
@@ -18,6 +20,8 @@ class GameManeger(
         private const val MIN_TICK_DELAY_MS = 500L
         private const val SPEEDUP_EVERY_TICKS = 5
         private const val SPEEDUP_STEP_MS = 100L
+
+        private const val DISTANCE_INCREMENT = 0.1
     }
     private val board: Array<Array<TileType>> = Array(rows) {
         Array(cols) { TileType.EMPTY }
@@ -29,6 +33,9 @@ class GameManeger(
     private var isRunning = false
     private var currentDelay = BASE_TICK_DELAY_MS
     private var ticks = 0
+
+    private var distance: Double = 0.0
+
 
     private val tick = object : Runnable{
         override fun run() {
@@ -78,15 +85,22 @@ class GameManeger(
 
     private fun generateRow(): Array<TileType> {
         val row = Array(cols) { TileType.EMPTY }
-        val maxRocks = min(2,cols)
-        val rocksToPlace = Random.nextInt(1,maxRocks+1)
+        val maxItems = min(3, cols)
+        val itemsToPlace = Random.Default.nextInt(1,maxItems+1)
         var placed = 0
-        
-        while(placed < rocksToPlace){
-            val col = Random.nextInt(cols)
+        var coinInThisRow = false
+
+        while(placed < itemsToPlace){
+            val col = Random.Default.nextInt(cols)
             if(row[col] == TileType.EMPTY){
-                row[col] = TileType.ROCK
-                placed++
+                if(!coinInThisRow && Random.Default.nextInt(10) < 2){
+                    row[col] = TileType.COIN
+                    coinInThisRow = true
+            }
+                else{
+                    row[col] = TileType.ROCK
+                    placed++
+                }
             }
         }
         return row
@@ -109,6 +123,11 @@ class GameManeger(
         flag = !flag
 
         board[0] = newRow
+
+        if(ticks % 5 == 0 && ticks != 0){
+            distance += DISTANCE_INCREMENT
+            callBack.onDistanceUpdated(distance)
+        }
 
         callBack.onBoardUpdated(copyBoard())    }
 
@@ -140,15 +159,33 @@ class GameManeger(
         callBack.onGameOver()
     }
 
+
+    fun getDistance(): Double{
+        return distance
+    }
+
+
     private fun checkCollision() {
         val lastRow = rows - 1
-        if(board[lastRow][carCol] == TileType.ROCK) {
-            lives--
-            callBack.onCollision(lives)
-            callBack.onLivesUpdated(lives)
-            if(lives <= 0) {
-                endGame()
+        val hitType = board[lastRow][carCol]
+
+        when(hitType){
+            TileType.ROCK -> {
+                lives--
+                callBack.onCollision(lives)
+                callBack.onLivesUpdated(lives)
+                if (lives <= 0) endGame()
+                board[lastRow][carCol] = TileType.EMPTY
             }
+
+            TileType.COIN -> {
+                distance += 0.3
+                callBack.onDistanceUpdated(distance)
+                callBack.onCoinPickedUp()
+                //TODO COIN sound
+                board[lastRow][carCol] = TileType.EMPTY
+            }
+            else -> {}
         }
     }
 
@@ -164,6 +201,10 @@ class GameManeger(
             carCol++
             callBack.onCarPositionChanged(carCol)
         }
+    }
+
+    fun setInitialDelay(delay: Long) {
+        this.currentDelay = delay
     }
 
 }
