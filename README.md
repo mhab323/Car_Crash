@@ -14,7 +14,7 @@ Car Crash is an exhilarating endless runner game designed for Android devices, d
 - **Difficulty:** Toggle "Fast Mode" on or off to set the initial speed.
 
 <div class="row">
-<img src="screenshots/Menu.png" alt="Menu Screen" width="1280"/>
+<img src="screenshots/Menu.png" alt="Menu Screen" width="200"/>
 </div>
 
 ### 2. Gameplay
